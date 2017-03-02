@@ -1,0 +1,174 @@
+@import helper._
+@(model: models.viewmodels.SubstanceListViewModel)
+
+@link = {
+    <link href="@routes.Assets.versioned("plugins/bower_components/datatables/jquery.dataTables.min.css")" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+@main(title=model.title) {
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h1 class="box-title">Edição</h1>
+
+              @form(action = controllers.routes.SubstanceController.saveOrUpdate(), 'method->"POST", 'class->"form-material form-horizontal"){
+                  @CSRF.formField
+
+                  <input type="hidden" name="id" value="@model.substance.id" />
+
+
+                  <div class="form-group">
+                      <label class="col-md-12" for="name">Nome</label>
+                        <div class="col-md-12">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="name" value="@model.substance.name">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="prescription">Receituário</label>
+                      <div class="col-md-12">
+                          <input type="text" id="prescription" name="prescription" class="form-control" placeholder="Prescrição" value="@model.substance.prescription">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-12" for="nameComplete">Sinônimo</label>
+                      <div class="col-md-12">
+                          <input type="text" id="nameComplete" name="nameComplete" class="form-control" placeholder="name Complete" value="@model.substance.nameComplete">
+                      </div>
+                  </div>
+                  @if(model.substance.uuid == null || model.substance.uuid.isEmpty()){
+                      <div class="form-group" >
+                          <label class="col-md-12" for="prescription">UUID</label>
+                          <div class="col-md-12">
+                              <input type="text" id="uuid" name="uuid" class="form-control" placeholder="07a4c757-481e-4e0b-b738-7a1416eb7b3a" value="@model.substance.uuid" required>
+                          </div>
+                      </div>
+                  }
+                  <div class="form-group">
+                      <label class="col-md-12" for="presentations">Apresentações</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="presentations" name="presentations">@model.substance.presentations</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="spectrum">Espetro</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="spectrum" name="spectrum"> @model.substance.spectrum</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="use">Uso</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="use" name="use"> @model.substance.use</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="contraindications">Contraindicações</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="contraindications" name="contraindications"> @model.substance.contraindications</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                        <label class="col-md-12" for="precautions">Precauções</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="3"  id="precautions" name="precautions"> @model.substance.precautions</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12" for="dosageAdult">Posologia (adulto)</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control-textarea" rows="3" id="dosageAdult" name="dosageAdult"> @model.substance.dosageAdult</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12" for="dosageInfantile">Posologia (criança)</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control-textarea" rows="3" id="dosageInfantile" name="dosageInfantile"> @model.substance.dosageInfantile</textarea>
+                        </div>
+                    </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="administration">Administração</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="administration" name="administration"> @model.substance.administration</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-12" for="adjustmentRenal">Ajuste Renal</label>
+                    <div class="col-md-12">
+                        <textarea class="form-control-textarea" rows="3" id="adjustmentRenal" name="adjustmentRenal"> @model.substance.adjustmentRenal</textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12" for="adjusmentHepatic">Ajuste Hepático</label>
+                    <div class="col-md-12">
+                        <textarea class="form-control" rows="3" id="adjusmentHepatic" name="adjusmentHepatic"> @model.substance.adjusmentHepatic</textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="effectsAdverses">Efeitos Adversos</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="effectsAdverses" name="effectsAdverses"> @model.substance.effectsAdverses</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="pregnancy">Gravidez</label>
+                      <div class="col-md-12">
+                          <input type="text" id="pregnancy" name="pregnancy" class="form-control" placeholder="name" value="@model.substance.pregnancy">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="comments">Amamentação/Lactação</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="comments" name="comments"> @model.substance.breadFeeding</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="comments">Mecanismo de Ação</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="comments" name="comments"> @model.substance.mechanism</textarea>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12" for="comments">Comentários</label>
+                      <div class="col-md-12">
+                          <textarea class="form-control" rows="3" id="comments" name="comments"> @model.substance.comments</textarea>
+                      </div>
+                  </div>
+
+
+
+                  <div class="form-group">
+                        <label class="col-md-12" for="interation">Interação</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="3" id="interation" name="interation"> @model.substance.interation</textarea>
+                        </div>
+                  </div>
+
+
+                  <!-- Select pregnancies -->
+                @*  <div class="form-group">
+                      <label class="col-sm-12">Gender</label>
+                      <div class="col-sm-12">
+                          <select class="form-control">
+                              <option>Select Gender</option>
+                              @for(preg <-  @model.substance.pregnancies )    {
+                                <option value="@preg">@preg</option>
+                              }
+                          </select>
+                      </div>
+                  </div>   *@
+
+                    <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Salvar</button>
+                    <button type="button" onclick="@routes.SubstanceController.list()" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+                }
+            </div>
+        </div>
+
+     </div>
+
+}
+
